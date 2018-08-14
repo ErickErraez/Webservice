@@ -5,10 +5,15 @@ class Login extends CI_Model{
         parent::__construct();
     }
 
-    function getUser(){
-        $query= $this->db->get('Login');
-        return $query->row();
+    function getUser($user,$pass){
+        $this->db->where('email',$user);
+        $this->db->where('contraseña',$pass);
+        $get= $this->db->get('Login');
+        if($get->num_rows()>0){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }
-        
-            
